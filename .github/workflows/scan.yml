@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "*/15 * * * *"
   workflow_dispatch:
+    inputs:
+      test_message:
+        description: "Send a test Telegram message to verify wiring"
+        type: boolean
+        default: false
 
 jobs:
   scan:
@@ -19,4 +24,5 @@ jobs:
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
+          TEST_MESSAGE: ${{ github.event.inputs.test_message }}
           
